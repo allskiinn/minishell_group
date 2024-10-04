@@ -1,0 +1,35 @@
+ 
+Uma shell ou shell de comandos é um programa que tem um objetivo especial: 
+
+lê as teclas premidas no teclado e interpreta os "comandos" que recebe desta forma. 
+
+A ideia geral é fazer com que um utilizador humano interaja com a shell de comandos 
+para realizar tarefas relacionadas com a manutenção do sistema ou do computador, tais 
+como manipular ficheiros ou alterar as definições de configuração de vários subsistemas. 
+
+Uma tarefa específica de uma shell de comandos é localizar e iniciar outras aplicações 
+que tenham uma tarefa específica. Por exemplo, pode iniciar um navegador Web ou um 
+programa de processamento de texto digitando o nome apropriado. Os shells também são 
+tipicamente capazes de executar "ficheiros batch" ou "shell scripts", que são ficheiros
+de texto que contêm uma série de comandos que, de outra forma, seriam digitados 
+um após o outro. 
+
+Desta forma, pode automatizar tarefas repetitivas, tais como fazer uma cópia de 
+segurança de um determinado diretório ou verificar se a quantidade de espaço em 
+disco restante é adequada. Conhecer os comandos da shell (tanto os comandos incorporados
+como os programas utilitários) é muito útil quando se é administrador de sistemas. 
+ 
+Na minha própria experiência (sou administrador de sistemas Linux há quase quinze anos)
+posso realizar certas tarefas de forma mais eficiente usando o teclado e emitindo comandos
+do que abrindo uma aplicação e empurrando o rato. O Linux em particular tem vários 
+programas sofisticados de shell de comandos, dos quais a minha preferência pessoal é o bash. 
+  
+Tradicionalmente, o Windows não tem dado muita atenção à capacidade de executar tarefas 
+usando um shell de comando. Uma solução do tipo MS-DOS sempre foi o padrão. 
+
+O OS/2 tinha uma shell de comandos muito boa, mas já ninguém a usa (onde está a outra metade? - risos).
+
+Mas nos últimos anos ouvi dizer que o Windows tem uma solução de shell de comandos que pretende 
+ser pelo menos tão boa como a que o Linux tem para oferecer. 
+
+Nunca trabalhei com ela, por isso não tenho uma opinião a dar.
