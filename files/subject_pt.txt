@@ -1,0 +1,77 @@
+INTRODUCAO:
+
+    A existência de conchas está ligada à própria existência de TI.
+
+    Na época, todos os desenvolvedores concordaram que se comunicar com um 
+    computador usando switches 1/0 alinhados era seriamente irritante. 
+
+    Foi lógico que eles tiveram a ideia de criar um software para se comunicar
+    com um computador usando linhas interativas de comandos em uma linguagem 
+    um pouco próxima da linguagem humana.
+
+    Graças ao Minishell, você poderá viajar no tempo e voltar aos problemas 
+    que as pessoas enfrentaram quando o Windows não existia.
+
+Seu shell deve:
+
+    • Exiba um prompt ao aguardar um novo comando.
+
+    • Ter um histórico de trabalho.
+
+    • Pesquise e inicie o executável certo (com base na variável PATH ou 
+    usando um caminho relativo ou absoluto).
+
+    • Evite utilizar mais do que uma variável global para indicar um sinal
+    recebido. Considere as implicações: essa abordagem garante que seu 
+    manipulador de sinais não acessará suas principais estruturas de dados.
+
+    ATENCAO: Cuidado. Esta variável global não pode fornecer qualquer outra informação
+    ou acesso a dados além do número de um sinal recebido. Portanto, o 
+    uso de estruturas do tipo "norma" no âmbito global é proibido.
+
+    • Não interpretar citações não fechadas ou caracteres especiais que não sejam
+         exigidos pelo assunto, como  (barra invertida) ou ; (ponto e vírgula).
+    • Handle ' (aspas simples), o que deve impedir que o shell interprete os 
+        meta-caracteres na sequência citada.
+    • Handle " (aspas duplas), o que deve impedir que o shell interprete os 
+        meta-caracteres na sequência de cotações, exceto $ (cifrão).
+    • Implementar redirecionamentos:
+        ◦ < deve redirecionar a entrada. 
+        ◦ > deve redirecionar a saída.
+        ◦ << deve receber um delimitador e, em seguida, ler a entrada até que uma linha
+             contendo o delimitador seja vista. No entanto, não precisa atualizar o histórico!
+        ◦ >> deve redirecionar a saída no modo de apêndice.
+    
+    • Implementar tubos (| caráter). A saída de cada comando no pipeline é conectada
+        à entrada do próximo comando através de um pipe.
+    • Manipule variáveis de ambiente ($ seguido por uma sequência de caracteres) 
+        que devem se expandir para seus valores.
+    • Lidar com $? que deve se expandir para o status de saída do gasoduto de
+        primeiro plano executado mais recentemente.
+    • Manipule ctrl-C, ctrl-D e ctrl- que devem se comportar como em bash.
+    • No modo interativo:
+        ◦ ctrl-C exibe um novo prompt em uma nova linha.
+        ◦ ctrl-D sai do invólucro.
+        ◦ ctrl- não faz nada.
+
+    • Seu shell deve implementar os seguintes builtins:
+        ◦ echo com opção -n
+        ◦ cd com apenas um caminho relativo ou absoluto
+        ◦ pwd sem opções
+        ◦ exportar sem opções
+        ◦ desconfigurado sem opções
+        ◦ env sem opções ou argumentos
+        ◦ Sair sem opções
+    
+A função readline() pode causar fugas de memória. Você não precisa consertá-los. 
+Mas isso não significa que seu próprio código, sim o código que você escreveu, 
+pode ter vazamentos de memória.
+
+Deve limitar-se à descrição do assunto. 
+Tudo o que não é perguntado não é necessário.
+Se você tiver alguma dúvida sobre um requisito, tome bash como referência. 
+
+IDEIA: 
+    Deve limitar-se à descrição do assunto. 
+    Tudo o que não é perguntado não é necessário.
+    Se você tiver alguma dúvida sobre um requisito, tome bash como referência.
