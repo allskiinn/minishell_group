@@ -6,13 +6,14 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:09:17 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/17 16:30:18 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:05:19 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_h
 
+#include "../libft/libft.h"
 #include <stdio.h>      // printf, perror, strerror
 #include <stdlib.h>     // malloc, free, exit, getenv
 #include <unistd.h>     // read, write, close, fork, pipe, dup, dup2, isatty, ttyname, ttyslot, access, chdir, getcwd
