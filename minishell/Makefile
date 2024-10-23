@@ -6,7 +6,7 @@
 #    By: aliberal <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 22:32:34 by aliberal          #+#    #+#              #
-#    Updated: 2024/10/17 22:38:12 by aliberal         ###   ########.fr        #
+#    Updated: 2024/10/23 18:20:13 by aliberal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ BOLD             := \033[1;1m
 
 # FDF
 NAME = minishell
-SRCS = 	./srcs/minishell.c
+SRCS = 	./srcs/minishell.c \
+		./srcs/tokens/tokens_aux.c \
+		./srcs/tokens/tokens.c \
+		./srcs/tokens/free_tokens.c
 
 OBJSDIR = objects
 OBJS = $(addprefix $(OBJSDIR)/,$(SRCS:.c=.o))

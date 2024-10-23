@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:09:17 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/22 22:46:49 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:19:17 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,12 @@
 
 typedef struct s_prompt
 {
+	char	*command;
 	char	*prompt;
 	size_t	len;
+	int		i;
+	int		start;
+	char	quote_char;
 } t_prompt;
 
 typedef enum	e_token_type 
@@ -56,15 +60,38 @@ typedef enum	e_token_type
     TOKEN_REDIRECT_OUT, // Ex: '>'
     TOKEN_APPEND,       // Ex: '>>'
     TOKEN_HEREDOC,      // Ex: '<<'
-    TOKEN_STRING,       // Ex: "palavra", 'texto'
+    TOKEN_SINGLE_Q,		// Ex: 'texto'
+    TOKEN_DOUBLE_Q,		// Ex: "palavra"
     TOKEN_EOF           // Fim da entrada de comando
 }				t_token_type;
 
 typedef struct	s_token 
 {
-    t_token_type	type;      // Tipo do token
-    char			*content;            // Conteúdo do token (ex: comando, argumento, operador)
-    struct s_token	*next;   // Ponteiro para o próximo token (caso esteja em uma lista ligada)
+    t_token_type	type;
+    char			*content;
+    struct s_token	*next;
 }				t_token;
+
+typedef struct	s_command
+{
+    char	**args;        // Lista de argumentos do comando
+    char	*input_file;   // Arquivo de entrada para redirecionamento
+    char	*output_file;  // Arquivo de saída para redirecionamento
+    int		append_mode;  // Modo de append para >>
+    int		is_pipe;      // Indica se o comando está antes de um pipe
+    struct	s_command *next;
+}				t_command;
+
+
+
+// tokens
+t_token			*create_token (t_token_type type, char *content);
+int				is_delimiter (char c);
+t_token_type	get_token_type (char *content);
+void			add_token_to_list(t_token **tokens, t_token *new_token);
+t_token			*tokenize (t_prompt *pos);
+const char		*token_type_to_string(t_token_type type);
+void			print_tokens (t_token *tokens);
+void            free_tokens(t_token *token);
 
 #endif
