@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:37:49 by aliberal          #+#    #+#             */
-/*   Updated: 2024/07/16 12:04:40 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/23 00:43:48 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ void	*ft_memmove(void *dest, const void *src, size_t len);
 void	*ft_memchr(const void *ptr, int value, size_t num);
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+size_t	ft_strncpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
+size_t	ft_strnlen(const char *str, size_t n);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *str, int c);
@@ -72,11 +74,13 @@ char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *str);
+char	*ft_strndup(const char *str, size_t n);
 char	*ft_strrchr(const char *str, int c);
 char	*ft_strnstr(const char *str, const char *search, size_t len);
 
 int		ft_memcmp(const void *ptr1, const void *ptr2, size_t num);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
+int		ft_strcmp(const char *str1, const char *str2);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		ft_isalnum(int c);

@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:09:17 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/17 23:05:19 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/22 22:46:49 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,32 @@
  # define WHITE "\e[00m"
  # define RED "\033[1;31m"
  # define BOLD "\033[1;1m"
+
+
+typedef struct s_prompt
+{
+	char	*prompt;
+	size_t	len;
+} t_prompt;
+
+typedef enum	e_token_type 
+{
+    TOKEN_COMMAND,      // Ex: 'ls', 'cat', 'grep'
+    TOKEN_ARGUMENT,     // Ex: '-l', 'arquivo.txt'
+    TOKEN_PIPE,         // Ex: '|'
+    TOKEN_REDIRECT_IN,  // Ex: '<'
+    TOKEN_REDIRECT_OUT, // Ex: '>'
+    TOKEN_APPEND,       // Ex: '>>'
+    TOKEN_HEREDOC,      // Ex: '<<'
+    TOKEN_STRING,       // Ex: "palavra", 'texto'
+    TOKEN_EOF           // Fim da entrada de comando
+}				t_token_type;
+
+typedef struct	s_token 
+{
+    t_token_type	type;      // Tipo do token
+    char			*content;            // Conteúdo do token (ex: comando, argumento, operador)
+    struct s_token	*next;   // Ponteiro para o próximo token (caso esteja em uma lista ligada)
+}				t_token;
 
 #endif

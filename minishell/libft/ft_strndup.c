@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 12:11:45 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/22 23:31:28 by aliberal         ###   ########.fr       */
+/*   Created: 2024/05/15 10:53:28 by aliberal          #+#    #+#             */
+/*   Updated: 2024/10/23 00:51:52 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+char	*ft_strndup(const char *str, size_t n)
 {
-	size_t	count;
+	char	*dup;
+	size_t	size;
 
-	if (!str)
-		return (0);
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	return (count);
+	size = ft_strnlen(str, n);
+	dup = malloc(size + 1);
+	if (!dup)
+		return (NULL);
+	ft_strncpy(dup, str, size);
+	dup[size] = '\0'; 
+	return (dup);
 }
