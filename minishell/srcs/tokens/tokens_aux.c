@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:08:09 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/23 23:23:45 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:19:43 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ t_token	*create_token(t_token_type type, char *content)
 	if (!no)
 		return (NULL);
 	no->type = type;
-	no->content = ft_strdup(content);
+	if ((content[0] == '"' && content[ft_strlen(content) - 1] == '"') || (content[0] == '\'' && content[ft_strlen(content) - 1] == '\''))
+		no->content = ft_strndup(content + 1, ft_strlen(content) - 2);
+	else
+		no->content = ft_strdup(content);
 	no->next = NULL;
 	return (no);
 }

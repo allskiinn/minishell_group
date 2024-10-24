@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:06:49 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/23 23:34:15 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:18:47 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,14 @@ void	set_content(t_prompt *pos,
 	}
 	if (pos->command[pos->i] != ' ')
 	{
-		content = ft_strndup(pos->command + pos->i, 1);
+		if ((pos->command[pos->i] == '>' && pos->command[pos->i + 1] == '>') ||
+			(pos->command[pos->i] == '<' && pos->command[pos->i + 1] == '<'))
+		{
+			content = ft_strndup(pos->command + pos->i, 2);
+			pos->i++;
+		}
+		else
+			content = ft_strndup(pos->command + pos->i, 1);
 		new = create_token(get_token_type(content), content);
 		free(content);
 		if (new == NULL)

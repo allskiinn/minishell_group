@@ -6,83 +6,126 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 23:37:55 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/24 01:38:50 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:49:02 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-size_t	get_size_args(t_token *current)
+size_t get_size_args(t_token *current)
 {
-	size_t	len = 0;
-	t_token *aux = current;
-	while (aux && aux->type != TOKEN_PIPE)
-	{
-		len++;
-		aux = aux->next;
-	}
-	return (len);
+    size_t len = 0;
+    t_token *aux = current;
+    while (aux && aux->type != TOKEN_PIPE)
+    {
+        len++;
+        aux = aux->next;
+    }
+    return (len);
 }
 
-char **get_agrs_token(t_token **current)
+char **get_agrs_token(t_token **current, t_command **cur_cmd)
 {
-	size_t i;
-	size_t size = get_size_args((*current));
-	printf("\nSIZE: %ld", size);
-	char **args = malloc(sizeof(char *) * size);
-	if (!args) return (NULL);
-	i = 0;
-	while ((*current) && (*current)->type != TOKEN_PIPE)
-	{
-		printf("\ni: %ld", i);
+    size_t i;
+    size_t size = get_size_args((*current));
+    printf("\nSIZE: %ld", size);
+    
+
+    char **args = malloc(sizeof(char *) * (size + 1));
+    if (!args) return (NULL);
+    
+    i = 0;
+    while ((*current) && (*current)->type != TOKEN_PIPE)
+    {
+        printf("\ni: %ld", i);
 		args[i] = ft_strdup((*current)->content);
-		(*current) = (*current)->next;
-		i++;
-	}
-	return (args);
-}
-
-void	print_cmd(t_command *cmds)
-{
-	t_command	*aux;
-
-	aux = cmds;
-	while (aux)
-	{
-		printf("\n\nARGS: [ ");
-		for (size_t i = 0; aux->args[i]; i++)
-			printf("%s ", aux->args[i]);
-		printf("\nIS PIPE: %d", aux->is_pipe);
-		aux = aux->next;
-	}
-}
-
-t_command	*parsing(t_token *tokens)
-{
-	t_token *aux = tokens;
-	t_command *list_cmds;
-	t_command *new_cmd;
-	t_command *aux_cmd;
-
-	list_cmds = NULL;
-	while (aux)
-	{
-		new_cmd = malloc(sizeof(t_command));
-		if (aux->type == TOKEN_PIPE)
-			new_cmd->is_pipe = 1;
-		else
-			new_cmd->is_pipe = 0;
-		new_cmd->args = get_agrs_token(&aux);
-		
-		if (!list_cmds)
-			list_cmds = new_cmd;
-		else
+		if ((*current)->type == TOKEN_REDIRECT_OUT)
 		{
-			aux_cmd = list_cmds;
-			while (aux_cmd->next)
-				aux_cmd = aux_cmd->next;
-			aux_cmd->next = new_cmd;
+			(*current) = (*current)->next;
+			(*cur_cmd)->output_file = ft_strdup((*current)->content);
 		}
-	}
-	return (list_cmds);
+		else if ((*current)->type == TOKEN_REDIRECT_IN)
+		{
+			(*current) = (*current)->next;
+			(*cur_cmd)->input_file = ft_strdup((*current)->content);
+		} else if ((*current)->type == TOKEN_APPEND)
+		{
+			(*cur_cmd)->append_mode = 1;
+			(*current) = (*current)->next;
+			(*cur_cmd)->output_file = ft_strdup((*current)->content);
+		}
+		else if ((*current)->type == TOKEN_HEREDOC)
+		{
+			(*cur_cmd)->heredoc_mode = 1;
+			(*current) = (*current)->next;
+			(*cur_cmd)->output_file = ft_strdup((*current)->content);
+		}
+		else
+        	(*current) = (*current)->next;
+        i++;
+    }
+
+    args[i] = NULL;
+    return (args);
+}
+
+void print_cmd(t_command *cmds)
+{
+    t_command *aux;
+
+    aux = cmds;
+    while (aux)
+    {
+        printf("\n\nARGS: [ ");
+        for (size_t i = 0; aux->args[i]; i++)
+            printf("%s ", aux->args[i]);
+        printf("]");
+        printf("\nIS PIPE: %d", aux->is_pipe);
+		printf("\nINPUT_FILE: %s", aux->input_file);
+		printf("\nOUTPUT_FILE: %s", aux->output_file);
+		printf("\nAPPEND_MODE: %d", aux->append_mode);
+		printf("\nHEDEDOC_MODE: %d", aux->heredoc_mode);
+        aux = aux->next;
+    }
+}
+
+t_command *parsing(t_token *tokens)
+{
+    t_token *aux = tokens;
+    t_command *list_cmds;
+    t_command *new_cmd;
+    t_command *aux_cmd;
+
+    list_cmds = NULL;
+    while (aux)
+    {
+        new_cmd = malloc(sizeof(t_command));
+        if (!new_cmd)
+            return (NULL);
+        
+        if (aux->type == TOKEN_PIPE)
+        {
+            new_cmd->is_pipe = 1;
+            aux = aux->next;
+        }
+        else
+            new_cmd->is_pipe = 0;
+		new_cmd->append_mode = 0;
+		new_cmd->heredoc_mode = 0;
+		new_cmd->input_file = NULL;
+		new_cmd->output_file = NULL;
+        new_cmd->args = get_agrs_token(&aux, &new_cmd);
+        new_cmd->next = NULL;
+
+        if (!list_cmds)
+            list_cmds = new_cmd;
+        else
+        {
+            aux_cmd = list_cmds;
+            while (aux_cmd->next)
+                aux_cmd = aux_cmd->next;
+            aux_cmd->next = new_cmd;
+        }
+    }
+    return (list_cmds);
 }

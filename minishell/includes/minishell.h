@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:09:17 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/24 01:11:06 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:47:02 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_command
     char	*input_file;   // Arquivo de entrada para redirecionamento
     char	*output_file;  // Arquivo de saída para redirecionamento
     int		append_mode;  // Modo de append para >>
+    int		heredoc_mode; // Modo de hededoc para <<
     int		is_pipe;      // Indica se o comando está antes de um pipe
     struct	s_command *next;
 }				t_command;
