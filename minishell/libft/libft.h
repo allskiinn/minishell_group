@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:37:49 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/23 00:43:48 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/24 01:27:32 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	*ft_memmove(void *dest, const void *src, size_t len);
 void	*ft_memchr(const void *ptr, int value, size_t num);
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+size_t	ft_strcpy(char *dest, const char *src);
 size_t	ft_strncpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *str);

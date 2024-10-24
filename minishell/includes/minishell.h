@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:09:17 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/23 18:19:17 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/24 01:11:06 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,9 @@ t_token			*tokenize (t_prompt *pos);
 const char		*token_type_to_string(t_token_type type);
 void			print_tokens (t_token *tokens);
 void            free_tokens(t_token *token);
+
+// commands
+t_command	*parsing(t_token *tokens);
+void        print_cmd(t_command *cmds);
 
 #endif

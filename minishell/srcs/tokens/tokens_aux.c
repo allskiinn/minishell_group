@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:08:09 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/23 14:23:45 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:23:45 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_tokens(t_token *tokens)
 	aux = tokens;
 	while (aux)
 	{
-		printf("\n\nType: %s\nContent: %s\nlen: %ld",
+		printf("\n\nType: %s\nContent:%s\nlen: %ld",
 			token_type_to_string(aux->type),
 			aux->content, ft_strlen(aux->content));
 		aux = aux->next;

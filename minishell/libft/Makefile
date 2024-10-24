@@ -6,7 +6,7 @@
 #    By: aliberal <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 15:24:31 by aliberal          #+#    #+#              #
-#    Updated: 2024/10/23 00:44:12 by aliberal         ###   ########.fr        #
+#    Updated: 2024/10/24 01:27:51 by aliberal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ FILES	= ft_isalpha.c \
 			ft_memmove.c \
 			ft_strlcpy.c \
 			ft_strncpy.c \
+			ft_strcpy.c \
 			ft_strlcat.c \
 			ft_toupper.c \
 			ft_tolower.c \

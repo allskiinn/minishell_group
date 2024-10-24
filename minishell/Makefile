@@ -6,7 +6,7 @@
 #    By: aliberal <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 22:32:34 by aliberal          #+#    #+#              #
-#    Updated: 2024/10/23 18:20:13 by aliberal         ###   ########.fr        #
+#    Updated: 2024/10/24 01:16:15 by aliberal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ NAME = minishell
 SRCS = 	./srcs/minishell.c \
 		./srcs/tokens/tokens_aux.c \
 		./srcs/tokens/tokens.c \
-		./srcs/tokens/free_tokens.c
+		./srcs/tokens/free_tokens.c \
+		./srcs/parsing/parsing.c
 
 OBJSDIR = objects
 OBJS = $(addprefix $(OBJSDIR)/,$(SRCS:.c=.o))
