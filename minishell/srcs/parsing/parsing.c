@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 23:37:55 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/24 14:49:02 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:19:51 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ char **get_agrs_token(t_token **current, t_command **cur_cmd)
 {
     size_t i;
     size_t size = get_size_args((*current));
-    printf("\nSIZE: %ld", size);
-    
 
     char **args = malloc(sizeof(char *) * (size + 1));
     if (!args) return (NULL);
@@ -37,7 +35,6 @@ char **get_agrs_token(t_token **current, t_command **cur_cmd)
     i = 0;
     while ((*current) && (*current)->type != TOKEN_PIPE)
     {
-        printf("\ni: %ld", i);
 		args[i] = ft_strdup((*current)->content);
 		if ((*current)->type == TOKEN_REDIRECT_OUT)
 		{
