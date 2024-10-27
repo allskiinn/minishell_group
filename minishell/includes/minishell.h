@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:09:17 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/25 13:48:18 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/27 01:59:28 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ typedef struct s_prompt
 	int		i;
 	int		start;
 	char	quote_char;
+    int     last_exit_status;
 } t_prompt;
 
 typedef enum	e_token_type 
 {
+    TOKEN_LITERAL,
+    TOKEN_ENV_VAR,
     TOKEN_COMMAND,      // Ex: 'ls', 'cat', 'grep'
     TOKEN_ARGUMENT,     // Ex: '-l', 'arquivo.txt'
     TOKEN_PIPE,         // Ex: '|'
@@ -64,6 +67,7 @@ typedef enum	e_token_type
     TOKEN_DOUBLE_Q,		// Ex: "palavra"
     TOKEN_EOF           // Fim da entrada de comando
 }				t_token_type;
+
 
 typedef struct	s_token 
 {
@@ -78,7 +82,7 @@ typedef struct	s_command
     char	*input_file;   // Arquivo de entrada para redirecionamento
     char	*output_file;  // Arquivo de saída para redirecionamento
     int		append_mode;  // Modo de append para >>
-    int		heredoc_mode; // Modo de hededoc para <<
+    int		heredoc_mode;  // Modo de append para >>
     int		is_pipe;      // Indica se o comando está antes de um pipe
     struct	s_command *next;
 }				t_command;

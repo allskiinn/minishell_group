@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 23:38:10 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/25 13:47:45 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/27 02:12:19 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,30 @@ int main(void)
 
     prompt.len = 34;
     prompt.prompt = GREEN BOLD"\n---(allskiin@shell)-[~]\n $> "RESET;
-    prompt.command = readline(prompt.prompt);
+    prompt.command = readline(prompt.prompt); // Aloca memória para `prompt.command`
     
     while ((prompt.command)) 
     {
         if (!ft_strcmp(prompt.command, "exit"))
         {
-            free(prompt.command);
-            free_tokens(tokens);
-            // free(command);
+            free(prompt.command); // Libera memória alocada para `prompt.command`
+            free_tokens(tokens); // Aqui, não sabemos se `tokens` é liberado corretamente
+            //free(command);
             exit(0);
         }
         
         tokens = tokenize(&prompt);
+        //print_tokens(tokens);
 		command = parsing(tokens);
         print_cmd(command);
-        // print_tokens(tokens);
         
-        free(prompt.command);
+        free(prompt.command); // Liberar a memória de `prompt.command` antes da próxima leitura
         
-        prompt.command = readline(prompt.prompt);
+        prompt.command = readline(prompt.prompt); // Nova alocação de memória
     }
     
-    free(prompt.command);
-    free_tokens(tokens);
+    free(prompt.command); // Libera a memória ao final
+    free_tokens(tokens); // Certifique-se de liberar `tokens` se ele estiver alocado
     return (0);
 }
 

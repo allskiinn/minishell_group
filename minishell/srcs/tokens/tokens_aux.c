@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:08:09 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/24 16:19:43 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:32:43 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ const	char	*token_type_to_string(t_token_type type)
 {
 	if (type == TOKEN_COMMAND)
 		return ("TOKEN_COMMAND");
+	else if (type == TOKEN_ENV_VAR)
+		return ("TOKEN_ENV_VAR");
+	else if (type == TOKEN_LITERAL)
+		return ("TOKEN_LITERAL");
 	else if (type == TOKEN_ARGUMENT)
 		return ("TOKEN_ARGUMENT");
 	else if (type == TOKEN_PIPE)
@@ -97,10 +101,7 @@ t_token	*create_token(t_token_type type, char *content)
 	if (!no)
 		return (NULL);
 	no->type = type;
-	if ((content[0] == '"' && content[ft_strlen(content) - 1] == '"') || (content[0] == '\'' && content[ft_strlen(content) - 1] == '\''))
-		no->content = ft_strndup(content + 1, ft_strlen(content) - 2);
-	else
-		no->content = ft_strdup(content);
+	no->content = ft_strdup(content);
 	no->next = NULL;
 	return (no);
 }

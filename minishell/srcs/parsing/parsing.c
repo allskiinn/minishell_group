@@ -6,7 +6,7 @@
 /*   By: aliberal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 23:37:55 by aliberal          #+#    #+#             */
-/*   Updated: 2024/10/25 13:19:51 by aliberal         ###   ########.fr       */
+/*   Updated: 2024/10/27 02:19:06 by aliberal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ size_t get_size_args(t_token *current)
 {
     size_t len = 0;
     t_token *aux = current;
-    while (aux && aux->type != TOKEN_PIPE)
+    while (aux)
     {
-        len++;
+		if (aux->type == TOKEN_PIPE)
+		{
+			len++;
+			break ;
+		}
+		len++;
         aux = aux->next;
     }
     return (len);
@@ -33,10 +38,17 @@ char **get_agrs_token(t_token **current, t_command **cur_cmd)
     if (!args) return (NULL);
     
     i = 0;
-    while ((*current) && (*current)->type != TOKEN_PIPE)
+    while ((*current))
     {
 		args[i] = ft_strdup((*current)->content);
-		if ((*current)->type == TOKEN_REDIRECT_OUT)
+		if ((*current)->type == TOKEN_PIPE)
+		{
+			(*cur_cmd)->is_pipe = 1;
+			i++;
+			(*current) = (*current)->next;
+			break ;
+		}
+		else if ((*current)->type == TOKEN_REDIRECT_OUT)
 		{
 			(*current) = (*current)->next;
 			(*cur_cmd)->output_file = ft_strdup((*current)->content);
@@ -99,14 +111,7 @@ t_command *parsing(t_token *tokens)
         new_cmd = malloc(sizeof(t_command));
         if (!new_cmd)
             return (NULL);
-        
-        if (aux->type == TOKEN_PIPE)
-        {
-            new_cmd->is_pipe = 1;
-            aux = aux->next;
-        }
-        else
-            new_cmd->is_pipe = 0;
+		new_cmd->is_pipe = 0;
 		new_cmd->append_mode = 0;
 		new_cmd->heredoc_mode = 0;
 		new_cmd->input_file = NULL;
